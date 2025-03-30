@@ -2,10 +2,11 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import httpx
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 app = FastAPI()
 
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_MODEL = "meta-llama/llama-3-8b-instruct"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
