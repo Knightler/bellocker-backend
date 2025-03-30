@@ -55,3 +55,7 @@ async def analyze_ad(request: AnalyzeRequest):
 
         content = result['choices'][0]['message']['content'].strip().lower()
         return {"classification": content}
+
+@app.get("/ping")
+async def ping():
+    return {"status": "ok"}
