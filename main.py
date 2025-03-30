@@ -1,6 +1,7 @@
 import os
 from pydantic import BaseModel
 import httpx
+
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
@@ -14,7 +15,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_MODEL = "meta-llama/llama-3-8b-instruct"
