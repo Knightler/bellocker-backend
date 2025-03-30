@@ -1,10 +1,18 @@
-from fastapi import FastAPI
+import os
 from pydantic import BaseModel
 import httpx
 from fastapi.middleware.cors import CORSMiddleware
-import os
+from fastapi import FastAPI
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or ["https://www.tomshardware.com"] for stricter
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_MODEL = "meta-llama/llama-3-8b-instruct"
@@ -45,11 +53,3 @@ async def analyze_ad(request: AnalyzeRequest):
 
         content = result['choices'][0]['message']['content'].strip().lower()
         return {"classification": content}
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
